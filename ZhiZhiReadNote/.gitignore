@@ -1,0 +1,8 @@
+Backups/
+Crashes/
+Documents/
+Logs/
+Resources/
+book/
+database-shm
+database-wal
