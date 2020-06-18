@@ -1,0 +1,11 @@
+{
+    // 额外路径-支持跳转
+    "python.autoComplete.extraPaths": [
+        "ExtraPath"
+    ],
+
+    // pylint 配置
+    "python.linting.pylintArgs": [
+        "--rcfile=PylintConfig/pylint.conf"
+    ]
+}
