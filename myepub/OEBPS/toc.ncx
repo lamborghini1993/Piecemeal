@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
+
+    <head>
+        <meta charset="UTF-8" />
+    </head>
+    <docTitle><text>大小宝贝(Title)</text></docTitle>
+    <docAuthor><text>大宝贝(Author)</text></docAuthor>
+
+    <navMap>
+        <navPoint class="chap01.html" id="chap01.html" playOrder="0">
+            <navLabel><text>小宝贝</text></navLabel>
+            <content src="chap01.html" />
+        </navPoint>
+        <navPoint class="chap02.html" id="chap02.html" playOrder="1">
+            <navLabel><text>大宝贝</text></navLabel>
+            <content src="chap02.html" />
+        </navPoint>
+    </navMap>
+</ncx>
