@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <!-- 这里是加载刚下好的echarts.min.js，注意路径 -->
+    <script src="echarts.min.js"></script>
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 1000px;height:600px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        // 显示标题，图例和空的坐标轴
+        option = {
+            title: {
+                text: '未来一周气温变化',
+                subtext: '纯属虚构'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataZoom: {
+                        yAxisIndex: 'none'
+                    },
+                    dataView: { readOnly: false },
+                    magicType: { type: ['line', 'bar'] },
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+            },
+            yAxis: {
+                type: 'value'
+            }
+        };
+
+        function fetchData(cb) {
+            // 通过 setTimeout 模拟异步加载
+            setTimeout(function () {
+                cb({
+                    legend_data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎'],
+                    xAxis_data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                    series_data: [
+                        {
+                            "name": '邮件营销',
+                            "type": 'line',
+                            "data": [120, 132, 101, 134, 90, 230, 210]
+                        },
+                        {
+                            "name": '联盟广告',
+                            "type": 'line',
+                            "data": [220, 182, 191, 234, 290, 330, 310]
+                        },
+                        {
+                            "name": '视频广告',
+                            "type": 'line',
+                            "data": [150, 232, 201, 154, 190, 330, 410]
+                        },
+                        {
+                            "name": '直接访问',
+                            "type": 'line',
+                            "data": [320, 332, 301, 334, 390, 330, 320]
+                        },
+                        {
+                            "name": '搜索引擎',
+                            "type": 'line',
+                            "data": [820, 932, 901, 934, 1290, 1330, 10]
+                        }
+                    ]
+                });
+            }, 1000);
+        }
+
+
+        function status(response) {
+            if (response.status >= 200 && response.status < 300) { return Promise.resolve(response); }
+            else { return Promise.reject(new Error(response.statusText)); }
+        }
+
+        function json(response) { return response.json(); }
+
+        fetch("http://127.0.0.1:8080/temp").then(status).then(json).then(function (data) {
+            myChart.setOption({
+                xAxis: {
+                    data: data.xAxis_data
+                },
+                legend: {
+                    data: data.legend_data
+                },
+                series: data.series_data
+            }).catch(function (err) {
+                console.log("Fetch错误:" + err);
+            });
+        });
+
+        // fetchData(function (data) {
+        //     myChart.setOption({
+        //         xAxis: {
+        //             data: data.xAxis_data
+        //         },
+        //         legend: {
+        //             data: data.legend_data
+        //         },
+        //         series: data.series_data
+        //     });
+        // });
+
+        myChart.setOption(option);
+
+    </script>
+</body>
+
+</html>
